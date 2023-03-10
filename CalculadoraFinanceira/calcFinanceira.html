@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latech - Calculadora financeira</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div>
+        <div>
+            <span>Quanto é a sua produção de leite mensal?</span>
+            <input id="i_leiteProd" >
+
+            <br>
+
+            <span>Qual seu valor de venda por litro?</span>
+            <input id="i_valorVenda">
+
+            <br>
+
+            <span>Qual seu valor de produção por litro?</span>
+            <input id="i_valorProd">
+            <br><br>
+        </div>
+
+        <div>
+            <button onclick="calcLeite()">Calcular valores</button>
+        </div>
+
+<div>
+        <div id="d_calcMensal"></div>
+            <br>
+        <div id="d_calcAnual"></div>
+            <br>
+        <div id="CNS"></div>
+            <br>
+        <div id="d_calcMensalCS"></div>
+            <br>
+        <div id="d_calcAnualCS"> </div>
+</div>    
+    
+    </div>
+</body>
+</html>
+
+<script>
+    function calcLeite() {
+        
+        var qtdLeiteProd = Number(i_leiteProd.value)
+        var valorVenda = Number(i_valorVenda.value)
+        var valorProd = Number(i_valorProd.value)
+
+        var qtdLeiteSemSolucao = qtdLeiteProd * 0.9
+        var qtdLeiteComSolucao = qtdLeiteProd * 0.96
+        
+        var qtdPerdaSemSolucao = qtdLeiteProd * 0.1
+        var qtdPerdaComSolucao = qtdLeiteProd * 0.04
+
+        var valorGastoProducao = qtdLeiteProd * valorProd
+        
+        var valorProdutoPerdSS = qtdPerdaSemSolucao * valorVenda
+        var valorProdutoPerdCS = qtdPerdaComSolucao * valorVenda
+
+        var valorBruto = qtdLeiteProd * valorVenda
+        var lucroBruto = valorBruto - valorProd
+
+        var valorLiquidoSemSolucao = qtdLeiteSemSolucao * valorVenda 
+        var lucroLiquidoSemSolucao = valorLiquidoSemSolucao - (valorProd * qtdLeiteProd)
+        
+        var valorLiquidoComSolucao = qtdLeiteComSolucao * valorVenda
+        var lucroLiquidoComSolucao = valorLiquidoComSolucao - valorProd * qtdLeiteProd
+        
+
+
+        
+        d_calcMensal.innerHTML = `Produzindo um total de ${qtdLeiteProd}L mensalmente você acaba tendo uma perda de R$${qtdPerdaSemSolucao} litros de leite, utilizando apenas ${qtdLeiteSemSolucao}L do total.
+                                  <br>Com um custo de produção de R$${valorProd} e um valor de venda de R$${valorVenda} você tem:
+                                  <br>Valor de produção Mensal: R$${valorGastoProducao}
+                                  <br>Valor liquido de venda Mensal: R$${valorLiquidoSemSolucao} 
+                                  <br>Valor de produto perdido: R$${valorProdutoPerdSS}
+                                  <br>Lucro total Mensal: R$${lucroLiquidoSemSolucao}`
+
+        d_calcAnual.innerHTML = `Produzindo um total de ${qtdLeiteProd * 12}L anualmente você acaba tendo uma perda de ${qtdPerdaSemSolucao * 12}L  de leite, utilizando apenas ${qtdLeiteSemSolucao * 12}L do total.
+                                  <br>Com um custo de produção de R$${valorProd} e um valor de venda de R$${valorVenda} você tem:
+                                  <br>Valor de produção Anual: R$${valorGastoProducao * 12}
+                                  <br>Valor liquido de venda anual: R$${valorLiquidoSemSolucao * 12} 
+                                  <br>Valor de produto perdido Anual: R$${valorProdutoPerdSS * 12}
+                                  <br>Lucro total Anual: R$${lucroLiquidoSemSolucao * 12}`
+    
+        CNS.innerHTML = `Com a nossa solução:`
+
+
+
+        d_calcMensalCS.innerHTML = `Produzindo um total de ${qtdLeiteProd}L mensalmente você acaba tendo uma perda de R$${qtdPerdaComSolucao} litros de leite, utilizando apenas ${qtdLeiteComSolucao}L do total.
+                                  <br>Com um custo de produção de R$${valorProd} e um valor de venda de R$${valorVenda} você tem:
+                                  <br>Valor de produção Mensal: R$${valorGastoProducao}
+                                  <br>Valor liquido de venda Mensal: R$${valorLiquidoComSolucao} 
+                                  <br>Valor de produto perdido: R$${valorProdutoPerdCS}
+                                  <br>Lucro total Mensal: R$${lucroLiquidoComSolucao}`
+
+        d_calcAnualCS.innerHTML = `Produzindo um total de ${qtdLeiteProd * 12}L anualmente você acaba tendo uma perda de ${qtdPerdaComSolucao * 12}L  de leite, utilizando apenas ${qtdLeiteComSolucao * 12}L do total.
+                                  <br>Com um custo de produção de R$${valorProd} e um valor de venda de R$${valorVenda} você tem:
+                                  <br>Valor de produção Anual: R$${valorGastoProducao * 12}
+                                  <br>Valor liquido de venda anual: R$${valorLiquidoComSolucao * 12} 
+                                  <br>Valor de produto perdido Anual: R$${valorProdutoPerdCS * 12}
+                                  <br>Lucro total Anual: R$${lucroLiquidoComSolucao * 12}`
+
+
+    }
+</script>
